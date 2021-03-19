@@ -1,50 +1,36 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+#### 开始开发：
 
-### Laravel6
+请先配置数据库：
 
-#### 对Laravel6进行了小修改（也不算是修改,就算是把常用的东西整合上去）
+执行命令：
 
-#### 1、返回接口统一
-    文件位置：
-        App\Helpers\json.php;
-    使用：
-        json_success($msg, $data);
-        json_fail($msg, $data);
-#### 2、Monolog\Logger整合
-    文件位置：
-        App\Helpers\logger.php;
-    使用：
-        logInfo($title, [$msg]);
-        logWarning($title, [$msg]);
-        logError($title, [$msg]);
-        logDebug($title, [$msg]);
-#### 3、JWT整合
-    文件位置：
-        App\Models\User
-    使用：
-        jwt整合到了auth，使用与auth一样
-#### 4、重写了异常处理
-    文件位置：
-        App\Exceptions\Handler
-    
-#### 5、整合了Repositories 设计模式
-        生成对应文件：
-            php artisan init:model-service
-        文件位置：
-            App\Repositories\*
-            App\Facades\*
-            App\Providers\RepositoryServiceProvider
-        使用：
-            use App\Facades\***;
-            ***::getFirst()...
-        这里封装的方法可以查看:
-            App\Traits\RepositoryBaseRepositoryTrait
-            App\Repositories\CommonRepository
-#### 6、在Helpers中封装了很多方法，也可以自己添加方法
-        文件位置：
-            App\Helpers\*
-#### 7、在 App\Traits\Controller\*下封装了一些公共的Controller方法，需要使用就use
-        文件位置：
-            App\Traits\Controller\*
-        使用：
-            use App\Facades\Controller\***;
+1. composer install --ignore-platform-reqs
+2. composer dump-auto
+3. php artisan storage:link
+
+#### 公共方法
+
+1. 如果需要获取用户（骑手、商家、管理员）表的信息：
+
+​         使用 auth()->user()->需要的字段，获取的时候需要在auth中添加参数
+
+​         骑手：rider  商家：business 普通管理员：admin 超级管理员：api
+
+​         例子：如果想要获取商家的姓名
+
+ auth('business ')->user()->name 即可获取商家的姓名
+
+2. 上传图片的公共方法：
+
+   直接使用 upload（$pic）传入的参数就是图片，返回的是一个相对路径
+
+3. 邮箱发送验证的公共方法：
+
+   ```php
+   email($ce, $email,$yong)
+   //传入的三个参数是，发送的内容，发送给那个邮箱，发送的主题。
+   ```
+
+**需要注意**:
+
+在测试的时候，需要先登录相应的用户，然后复制用户的token，在测试的时候传入。但是无需向前端索取token
