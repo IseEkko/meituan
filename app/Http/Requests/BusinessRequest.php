@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+
+class BusinessRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'email' => 'required|unique:business,email',
+            'password' =>'required',
+            'identity' =>'required',
+            'name' =>'required',
+            'shop_name' =>'required',
+            'number' =>'required',
+            'license' =>'required',
+            'message' =>'required',
+            'address' =>'required',
+            'image_url' =>'required',
+            'type' =>'required',
+
+        ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw (new HttpResponseException(json_fail('参数错误!',$validator->errors()->all(),422)));
+    }
+}
