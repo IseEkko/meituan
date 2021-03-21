@@ -23,6 +23,14 @@ class RiderLoginController extends Controller
             $credentials = self::credentials($loginRequest);
             if (!$token = auth('rider')->attempt($credentials)) {
                 return json_fail(100, '账号或者用户名错误!', null);
+            }else{
+                $passing= Rider::find($loginRequest['email']);
+                $pass = json_encode($passing);
+                $pass = json_decode($pass);
+                //判断权限
+                if (!($pass[0]->real_passing==200&&$pass[0]->passing==200)){
+                    return json_fail(100, '验证未完成!', null);
+                }
             }
             return self::respondWithToken($token, '登陆成功!');
         } catch (\Exception $e) {
@@ -90,6 +98,8 @@ class RiderLoginController extends Controller
         $registeredInfo['email'] = $registeredInfo['email'];
         $registeredInfo['approval'] = 100;
         $registeredInfo['real_approval'] = 100;
+        $registeredInfo['passing'] = 100;
+        $registeredInfo['real_passing'] = 100;
 
         return $registeredInfo;
     }

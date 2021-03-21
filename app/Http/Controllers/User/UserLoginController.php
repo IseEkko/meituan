@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddUserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserLoginController extends Controller
@@ -14,7 +16,7 @@ class UserLoginController extends Controller
      * @author LiZhongZheng <https://github.com/bixuande>
      * return json
      */
-    public function GetInfo(Request $request)
+    public function getInfo(Request $request)
     {
         $code = $request['code'];
         $url = 'https://api.weixin.qq.com/sns/jscode2session?appid=wxaff39afcf4ab704d&secret=611082f442da431bf6692569ebc45635&js_code='.$code.'&grant_type=authorization_code';
@@ -31,6 +33,18 @@ class UserLoginController extends Controller
         }else{
             return json_fail('操作失败!',null,100);
         }
+    }
+    /***
+     * 增加用户
+     * @param AddUserRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function addUser(AddUserRequest $request)
+    {
+        $userinfo = User::addUser($request);
+        return $userinfo?
+            json_success('添加用户成功',null,200):
+            json_fail('添加用户失败',null,100);
     }
 
 
