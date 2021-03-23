@@ -52,6 +52,7 @@ class Order extends Model
 
     }
 
+<<<<<<< HEAD
     /**
      * @param $order_id
      * @return null
@@ -70,6 +71,8 @@ class Order extends Model
         }
     }
 
+=======
+>>>>>>> origin/master
     /***改变order表中订单状态
      * @author zuoshengyu
      * @param $order_id
@@ -89,6 +92,7 @@ class Order extends Model
         }
     }
 
+<<<<<<< HEAD
     /***骑手取货改变订单状态
      * @author zsywx
      * @param $order_id
@@ -108,6 +112,8 @@ class Order extends Model
         }
     }
 
+=======
+>>>>>>> origin/master
     /***未支付页面数据
      * @author zuoshengyu
      * @param $order_id
