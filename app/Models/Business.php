@@ -51,6 +51,10 @@ class Business extends \Illuminate\Foundation\Auth\User implements JWTSubject,\I
         }
     }
 
+    /***获取退款列表数据
+     * @author zuoshengyu
+     * @return json
+     */
     public static function tuilist(){
 
         try{
@@ -66,6 +70,11 @@ class Business extends \Illuminate\Foundation\Auth\User implements JWTSubject,\I
 
     }
 
+    /***获取退款页面数据
+     * @author zuoshengyu
+     * @param $order_id
+     * @return json
+     */
     public static function tuiye($order_id){
 
         try{
@@ -81,6 +90,11 @@ class Business extends \Illuminate\Foundation\Auth\User implements JWTSubject,\I
         }
 
     }
+    /***获取已完成页面数据
+     * @author zuoshengyu
+     * @param $order_id
+     * @return json
+     */
     public static function finishye($order_id){
 
         try{
@@ -97,6 +111,10 @@ class Business extends \Illuminate\Foundation\Auth\User implements JWTSubject,\I
 
     }
 
+    /***获取派送列表数据
+     * @author zuoshengyu
+     * @return json
+     */
     public static function paylist(){
 
         try{
@@ -112,6 +130,10 @@ class Business extends \Illuminate\Foundation\Auth\User implements JWTSubject,\I
 
     }
 
+    /***获取已完成列表数据
+     * @author zuoshengyu
+     * @return json
+     */
     public static function finishlist(){
 
         try{
@@ -126,6 +148,11 @@ class Business extends \Illuminate\Foundation\Auth\User implements JWTSubject,\I
         }
 
     }
+    /***获取派送页面数据
+     * @author zuoshengyu
+     * @param $order_id
+     * @return json
+     */
     public static function paiye($order_id){
 
         try{
@@ -142,6 +169,11 @@ class Business extends \Illuminate\Foundation\Auth\User implements JWTSubject,\I
         }
 
     }
+    /***获取派送页面数据
+     * @author zuoshengyu
+     * @param $order_id
+     * @return json
+     */
     public static function tui($order_id){
 
         try{

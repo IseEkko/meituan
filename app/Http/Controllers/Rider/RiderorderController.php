@@ -12,7 +12,7 @@ class RiderorderController extends Controller
 {
     /***
      * 获取骑手订单列表
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param RiderorderlistRequest $request
      * @return json
      */
@@ -27,7 +27,7 @@ class RiderorderController extends Controller
 
     /***
      * 联系商家
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return json
      */
     public  function rcallbusiness(){
@@ -39,7 +39,7 @@ class RiderorderController extends Controller
 
     /****
      * 联系用户
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return json
      */
     public function rcalluser(){
@@ -51,7 +51,7 @@ class RiderorderController extends Controller
 
     /***
      * 获取骑手订单详情
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param RiderorderRequest $request
      * @return json
      */

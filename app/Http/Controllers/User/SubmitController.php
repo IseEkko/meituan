@@ -24,7 +24,7 @@ class SubmitController extends Controller
 
 
     /***获取商品商家信息
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UsersubmitorderRequest $request
      * @return json
      */
@@ -40,7 +40,7 @@ class SubmitController extends Controller
     }
 
     /***获取用户数据
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UsersubmituOrderRequest $request
      * @return json
      */
@@ -73,7 +73,7 @@ class SubmitController extends Controller
     }
 
     /***提供随机时间
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserDeliveryOrderRequest $request
      * @return json
      */
@@ -91,7 +91,7 @@ class SubmitController extends Controller
     }
 
     /***获取支付订单页面数据
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserPayorderRequest $request
      * @return json
      */
@@ -120,7 +120,7 @@ class SubmitController extends Controller
     }
 
     /***获取总价
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param Request $request
      * @return json
      */
@@ -138,7 +138,7 @@ class SubmitController extends Controller
     }
 
     /*** 支付页面的支付功能
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserPayRequest $request
      * @return json
      */
@@ -154,7 +154,7 @@ class SubmitController extends Controller
     }
 
     /***获取未支付订单页面数据
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserPayRequest $request
      * @return json
      */
@@ -169,7 +169,7 @@ class SubmitController extends Controller
 
 
     /***获取派送订单页面数据
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserPayRequest $request
      * @return json
      */
@@ -183,7 +183,7 @@ class SubmitController extends Controller
     }
 
     /***退款订单页面数据获取
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserPayRequest $request
      * @return json
      */
@@ -197,7 +197,7 @@ class SubmitController extends Controller
     }
 
     /***获取完成订单页面数据
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserPayRequest $request
      * @return json
      */
@@ -212,7 +212,7 @@ class SubmitController extends Controller
 
 
     /***获取未付款列表数据
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return json
      */
     Public function unomonylist(){
@@ -225,7 +225,7 @@ class SubmitController extends Controller
     }
 
     /***获取派送页面列表数据
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return \Illuminate\Http\JsonResponse
      */
     Public function udeliverylist(){
@@ -238,7 +238,7 @@ class SubmitController extends Controller
     }
 
     /***获取完成页面列表数据
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return json
      */
     Public function ufinishlist(){
@@ -251,7 +251,7 @@ class SubmitController extends Controller
     }
 
     /***订单页面下的退款列表
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return json
      */
     Public function urefundlist(){
@@ -263,7 +263,7 @@ class SubmitController extends Controller
     }
 
     /***派送订单页面下的退单功能
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param  UserBackRequest $request
      * @return json
      */
@@ -279,7 +279,7 @@ class SubmitController extends Controller
     }
 
     /***派送订单下的确认收货
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param  UserPayRequest $request
      * @return json
      */
@@ -294,7 +294,7 @@ class SubmitController extends Controller
 
 
     /***联系商家
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return json
      */
     Public function callbusiness(){
@@ -305,7 +305,7 @@ class SubmitController extends Controller
 
     }
     /***联系骑手
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return json
      */
     Public function callrider(){
@@ -318,7 +318,7 @@ class SubmitController extends Controller
 
     /***
      * 增加评价
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param AssessRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
