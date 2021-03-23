@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use http\Exception;
 use Illuminate\Database\Eloquent\Model;
 use mysql_xdevapi\Exception;
 
@@ -11,6 +12,59 @@ class Order extends Model
     public $timestamps = true;
     protected $primaryKey = "order_id";
     protected $guarded = [];
+
+
+    /**
+     *展示抢单总页面
+     * @author tangbangyan <github.com/doublebean>
+     * @return mixed
+     */
+    public static function tby_showReceivingOrderAll()
+    {
+        try{
+            $date=Order::join('business' ,'business.business_id' , 'order.business_id' )
+                ->join('goods','goods.goods_id','order.goods_id')
+                ->select('order.*','business.name','goods.price','goods.goods_name')
+                ->get();
+            return $date;
+        }catch(Exception $e){
+            logger::Error('没有找到抢单总页面',[$e->getMessage()]);
+        }
+    }
+    /**
+     *展示抢单对应页面
+     * @author tangbangyan <github.com/doublebean>
+     * @param  $order_id
+     * @return mixed
+     */
+    public static function tby_showReceivingOrder($order_id)
+    {
+        try{
+            $date=Order::join('business' ,'business.business_id' , 'order.business_id' )
+                ->join('goods','goods.goods_id','order.goods_id')
+                ->where('order.order_id',$order_id)
+                ->get();
+            return $date;
+        }catch(Exception $e){
+            logger::Error('没有找到抢单总页面',[$e->getMessage()]);
+        }
+    }
+    /**
+     *抢单功能
+     * @author tangbangyan <github.com/doublebean>
+     * @param  $request
+     * @return mixed
+     */
+    public static function tby_catchReceivingOrder($request)
+    {
+        try{
+            $date=Order::where('order_id',$request['order_id'])
+            -> update(['rider_id'=>$request['rider_id']])
+            ;
+            return true;
+        }catch(Exception $e){
+            logger::Error('没有找到抢单成功',[$e->getMessage()]);
+        }
 
 
     /*** 提交订单 将数据入库
@@ -52,7 +106,7 @@ class Order extends Model
 
     }
 
-<<<<<<< HEAD
+
     /**
      * @param $order_id
      * @return null
@@ -71,8 +125,7 @@ class Order extends Model
         }
     }
 
-=======
->>>>>>> origin/master
+
     /***改变order表中订单状态
      * @author zuoshengyu
      * @param $order_id
@@ -92,7 +145,6 @@ class Order extends Model
         }
     }
 
-<<<<<<< HEAD
     /***骑手取货改变订单状态
      * @author zsywx
      * @param $order_id
@@ -112,8 +164,7 @@ class Order extends Model
         }
     }
 
-=======
->>>>>>> origin/master
+
     /***未支付页面数据
      * @author zuoshengyu
      * @param $order_id
@@ -397,6 +448,7 @@ class Order extends Model
             logError('获取骑手订单列表错误',[$e->getMessage()]);
             return null;
         }
+
 
     }
 }
