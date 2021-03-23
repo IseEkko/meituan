@@ -51,4 +51,168 @@ class Rider extends \Illuminate\Foundation\Auth\User implements JWTSubject,\Illu
             return null;
         }
     }
+
+    /***
+     * 查询权限
+     */
+    public static function find($id){
+        try {
+
+            $pass = Rider::select('real_passing','passing')
+                ->where('email',$id)
+                ->get();
+            return $pass ? $pass :false;
+        } catch (\Exception $e) {
+            logError('查询权限失败',[$e->getMessage()]);
+            return null;
+        }
+    }
+
+    /***
+     * 骑手头像获取
+     * @param $id
+     * @return false|null
+     * @author lizhongzheng <github.com/bixuande>
+     */
+    public static function gettou($id){
+        try {
+
+            $pass = Rider::select('name','head_url')
+                ->where('rider_id',$id)
+                ->get();
+            return $pass ? $pass :false;
+        } catch (\Exception $e) {
+            logError('查询权限失败',[$e->getMessage()]);
+            return null;
+        }
+
+    }
+
+    /***
+     * 骑手头像修改
+     * @param $request
+     * @param $headpath
+     * @param $id
+     * @return false|null
+      * @author lizhongzheng <github.com/bixuande>
+     */
+    public  static function updaretou($request,$headpath,$id){
+        try {
+
+            $pass = Rider::where('rider_id',$id)
+                ->update([
+                    'name' => $request['name'],
+                    'head_url' => $headpath
+                ]);
+            return $pass ? $pass :false;
+        } catch (\Exception $e) {
+            logError('骑手头像获取失败',[$e->getMessage()]);
+            return null;
+        }
+    }
+
+    /***
+     * 骑手详情页展示
+     * @param $id
+     * @return false|null
+     * @author lizhongzheng <github.com/bixuande>
+     */
+    public static function getRiderPer($id){
+        try {
+            $pass = Rider::where('rider_id',$id)
+               ->select('number','gender','region','age')
+                ->get();
+            return $pass ? $pass :false;
+        } catch (\Exception $e) {
+            logError('骑手详情展示失败',[$e->getMessage()]);
+            return null;
+        }
+    }
+
+    /***
+     * 骑手详情修改
+     * @param $req
+     * @param $id
+     * @return false|null
+     * @author lizhongzheng <github.com/bixuande>
+     */
+    public static function updateper($req,$id){
+        try {
+            $pass = Rider::where('rider_id',$id)
+               ->update([
+                   'region' => $req['region'],
+                   'number' => $req['number']
+               ]);
+            return $pass ? $pass :false;
+        } catch (\Exception $e) {
+            logError('骑手详情修改失败',[$e->getMessage()]);
+            return null;
+        }
+    }
+
+    /***
+     * 骑手钱包展示
+     * @param $id
+     * @return false|null
+     * @author lizhongzheng <github.com/bixuande>
+     */
+    public static function showMoney($id){
+        try {
+            $pass = Rider::where('rider_id',$id)
+               ->select('wallet')
+                ->get();
+            return $pass ? $pass :false;
+        } catch (\Exception $e) {
+            logError('骑手钱包展示失败',[$e->getMessage()]);
+            return null;
+        }
+    }
+
+
+    public static function updateRiderMoney($id,$money){
+        try {
+            $pass = Rider::where('rider_id',$id)
+                ->update([
+                    'wallet' => $money
+                ]);
+            return $pass ? $pass :false;
+        } catch (\Exception $e) {
+            logError('骑手详情修改失败',[$e->getMessage()]);
+            return null;
+        }
+    }
+
+    public static function Pass($email){
+        try {
+            $res = self::where('email',$email)
+                ->update([
+                    'emailpass'=>200
+                ]);
+            return $res;
+        }catch (\Exception $err){
+            logError('骑手邮箱验证修改状态失败！', [$err->getMessage()]);
+            return null;
+        }
+    }
+
+    /***
+     * 骑手修改密码
+     * @param $req
+     * @param $id
+     * @return null
+     */
+    public static function updatePass($req,$id){
+        try {
+
+            $res = self::where('rider_id',$id)
+                ->update([
+                    'emailpass'=>100,
+                    'password'=>$req
+                ]);
+            return $res;
+        }catch (\Exception $err){
+            logError('商家密码修改失败！', [$err->getMessage()]);
+            return null;
+        }
+    }
 }
