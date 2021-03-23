@@ -50,4 +50,71 @@ class Business extends \Illuminate\Foundation\Auth\User implements JWTSubject,\I
         }
     }
 
+    /***
+     * 展示全部商家信息
+     * @return |null
+     */
+    public static function tg_selectAll(){
+        try{
+            $data = Business::select("business_id",
+            "shop_name",
+            "identity",
+            "name")->get();
+            return $data;
+        }catch (\Exception $e){
+            logError("查找失败",[$e->getMessage()]);
+            return null;
+        }
+    }
+
+    /***
+     *
+     * @param $type
+     * @return |null
+     */
+    public static function tg_selectAllType($type){
+        try{
+            $data = Business::select("business_id",
+                "shop_name",
+                "identity",
+                "name")->where("type",$type)->get();
+            return $data;
+        }catch (\Exception $e){
+            logError("查找失败",[$e->getMessage()]);
+            return null;
+        }
+    }
+
+
+
+    public static function tg_selectReMen(){
+        try{
+            $data = Business::select("image_url",
+            "shop_name")->take(6)->get();
+            return $data;
+        }catch (\Exception $e){
+            logError("查找失败",[$e->getMessage()]);
+            return null;
+        }
+    }
+
+
+
+    public static function tg_selectBusinessById($business_id){
+        try{
+
+            $data = Business::where("business_id",$business_id)
+                ->select("license",
+                "shop_name",
+                    'address',
+                    'message',
+                    'image_url'
+                )
+                ->get();
+            return $data;
+        }catch (\Exception $e){
+            logError("查找失败",[$e->getMessage()]);
+            return null;
+        }
+    }
 }

@@ -9,4 +9,38 @@ class Comment extends Model
     public $timestamps = true;
     protected $primaryKey = "comment_id";
     protected $guarded = [];
+
+
+        public static function tg_selectAll($price){
+        try{
+            $data = Order::join("comment","comment.order_id")
+                ->where("goods.price",$price)
+                ->select("goods.price",
+                    "comment.order_id")
+                ->get();
+            return $data;
+        }catch (\Exception $e){
+            logError("查找失败",[$e->getMessage()]);
+            return null;
+        }
+    }
+
+
+        public static function tg_selectpingjia($business_id){
+        try{
+            $data = Comment::join("user","user.user_id","comment.user_id")
+                ->where("comment.business_id",$business_id)
+                ->select("user.user_id",
+                    "user.name",
+                    "comment.iamge_url")
+                ->get();
+            return $data;
+        }catch (\Exception $e){
+            logError("查找失败",[$e->getMessage()]);
+            return null;
+        }
+    }
+
 }
+
+
