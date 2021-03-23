@@ -52,6 +52,24 @@ class Order extends Model
 
     }
 
+    /**
+     * @param $order_id
+     * @return null
+     * @author zuoshengyu
+     * 获取商品id 和 数量
+     */
+    public static  function  getGoods_idAndNum($order_id){
+        try {
+            $data = self::where('order_id',$order_id)
+                ->select('num','goods_id')
+                ->get();
+            return $data;
+        }catch(\Exception $e){
+            logError('获取商品id和数量失败',[$e->getMessage()]);
+            return null;
+        }
+    }
+
     /***改变order表中订单状态
      * @author zuoshengyu
      * @param $order_id
@@ -61,11 +79,30 @@ class Order extends Model
         try {
             $data=self::where('order_id',$order_id)
             ->update([
-                'type'=>'派送中'
+                'type'=>'等待骑手接单'
             ]);
             return $data;
         }
     catch(\Exception $e){
+            logError('获取用户信息错误',[$e->getMessage()]);
+            return null;
+        }
+    }
+
+    /***骑手取货改变订单状态
+     * @author zsywx
+     * @param $order_id
+     * @return null
+     */
+    public static function typechangef($order_id){
+        try {
+            $data=self::where('order_id',$order_id)
+                ->update([
+                    'type'=>'派送中'
+                ]);
+            return $data;
+        }
+        catch(\Exception $e){
             logError('获取用户信息错误',[$e->getMessage()]);
             return null;
         }
@@ -298,21 +335,6 @@ class Order extends Model
             return null;
         }
     }
-//    public static function payss($date){
-//        try {
-//            $date = self::Join('business','business.business_id','order.business_id')
-//                ->Join('goods','goods.goods_id','order.goods_id')
-//                ->where('order.order_id','=',$date[0].order_id)
-//                ->select('order.order_id','business.name','goods.goods_name','goods.image_url','goods.price','order.total')
-//                ->get();
-//
-//            return $date;
-//        }
-//        catch(\Exception $e){
-//            logError('获取用户信息错误',[$e->getMessage()]);
-//            return null;
-//        }
-//    }
     /*** 获取骑手订单
      * @param 骑手id
      * @return 订单列表
@@ -333,7 +355,7 @@ class Order extends Model
 
     /***
      * @param $order_id '订单id'
-     * @return '用户id和商家id'
+     * @return null '用户id和商家id'
      */
     public static  function getUser_idAndBusiness_id($order_id){
         try{
@@ -346,10 +368,11 @@ class Order extends Model
             return null;
         }
     }
+
     /***
      * 骑手获取订单详情
-     * @param 订单id
-     * @return 订单详情
+     * @param '订单id'
+     * @return null '订单详情'
      */
     public static  function riderorde($order_id){
         try {

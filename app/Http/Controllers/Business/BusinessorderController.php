@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BusinessIdRequest;
 use App\Http\Requests\UserPayRequest;
 use App\Models\Business;
+use App\Models\Goods;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -98,7 +99,9 @@ class BusinessorderController extends Controller
      */
     Public function bbackmoney(UserPayRequest $request){
         $order_id=$request->get('order_id');
-        $date=Order::typechangeb($order_id);
+        Order::typechangeb($order_id);
+        $getGoods_idAndNum = Order::getGoods_idAndNum($order_id);
+        $date=Goods::reduceGoods_num($getGoods_idAndNum[0]->num,$getGoods_idAndNum[0]->goods_id);
         return $date?
             json_success('获取成功!',$date,200) :
             json_fail('获取失败!',null,100);
@@ -117,4 +120,16 @@ class BusinessorderController extends Controller
 
     }
 
+    /***骑手确认取货功能
+     *   * @author zuoshengyuwx
+     * @return json
+     */
+    Public function briderdelivery(UserPayRequest $request){
+        $order_id=$request->get('order_id');
+        $date=Order::typechangef($order_id);
+        return $date?
+            json_success('获取成功!',$date,200) :
+            json_fail('获取失败!',null,100);
+
+    }
 }

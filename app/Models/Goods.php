@@ -58,4 +58,39 @@ class Goods extends Model
         }
 
     }
+    /**
+     * 增加商品销量
+     * @param $num '数量'
+     * @param $goods_id '商品id'
+     * @return null
+     */
+    public static function addGoods_num($num,$goods_id){
+        try {
+            $data=self::where('goods_id',$goods_id)
+                ->increment('num',2);
+            return $data;
+        }
+        catch(\Exception $e){
+            logError('销量增加失败',[$e->getMessage()]);
+            return null;
+        }
+    }
+
+    /**
+     * //减少商品销量
+     * @param $num'数量'
+     * @param $goods_id '商品id'
+     * @return null
+     */
+    public static function reduceGoods_num($num,$goods_id){
+        try {
+            $data=self::where('goods_id','=',$goods_id)
+                ->decrement('num',$num);
+            return $data;
+        }
+        catch(\Exception $e){
+            logError('销量减少失败',[$e->getMessage()]);
+            return null;
+        }
+    }
 }

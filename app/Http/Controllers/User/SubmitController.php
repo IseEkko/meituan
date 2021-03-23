@@ -56,6 +56,7 @@ class SubmitController extends Controller
     }
 
     /***提供配送费
+     * * @author zuoshengyuwx
      * @param UserDeliveryOrderRequest $request
      * @return json
      */
@@ -144,12 +145,17 @@ class SubmitController extends Controller
      */
     Public function pay(UserPayRequest $request){
         $order_id=$request->get('order_id');
-        $date=Order::typechange($order_id);
 
+        Order::typechange($order_id);
+
+        $getGoods_idAndNum = Order::getGoods_idAndNum($order_id);
+
+        $date=Goods::addGoods_num($getGoods_idAndNum[0]->num,$getGoods_idAndNum[0]->goods_id);
 
         return $date?
-            json_success('获取成功!',$date,200) :
-            json_fail('获取失败!',null,100);
+            json_success('支付成功!',$date,200) :
+            json_fail('支付失败!',null,100)
+            ;
 
     }
 
