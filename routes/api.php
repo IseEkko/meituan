@@ -24,15 +24,15 @@ Route::prefix('super')->namespace('Super')->group(function () {
 });//--lzz
 
 Route::prefix('rider')->namespace('Rider')->group(function () {
-    Route::post('login', 'RiderLoginController@login'); //骑手登陆
-    Route::post('logout', 'RiderLoginController@logout'); //骑手退出登陆
+    Route::post('login', 'RiderLoginController@login'); //骑手登陆--zsywx
+    Route::post('logout', 'RiderLoginController@logout'); //骑手退出登陆--zsywx
     Route::post('registered', 'RiderLoginController@registered'); //骑手注册
     Route::get('riderorderlist', 'RiderorderController@riderorderlist'); //骑手接单显示
     Route::get('rcallbusiness', 'RiderorderController@ rcallbusiness'); //联系商家
     Route::get('rcalluser', 'RiderorderController@rcalluser'); //联系用户
     Route::get('riderorder', 'RiderorderController@riderorder'); //骑手订单查看
 
-});//--lzz
+});//--lzz  zsy
 Route::prefix('business')->namespace('Business')->group(function () {
     Route::post('login', 'BusinessLoginController@login'); //商户登陆
     Route::post('logout', 'BusinessLoginController@logout'); //商户退出登陆
@@ -45,7 +45,7 @@ Route::prefix('business')->namespace('Business')->group(function () {
     Route::any('bdeliveryorder', 'BusinessorderController@bdeliveryorder');//派送页面
     Route::post('bbackmoney', 'BusinessorderController@bbackmoney');//退款功能
     Route::post('bcallrider', 'BusinessorderController@bcallrider');//联系骑手
-});//--lzz
+});//--lzz  zsy
 Route::prefix('admin')->namespace('Admin')->group(function () {
     Route::post('login', 'AdminLoginController@login'); //商户登陆
     Route::post('logout', 'AdminLoginController@logout'); //商户退出登陆
@@ -76,4 +76,4 @@ Route::prefix('user')->namespace('User')->group(function () {
     Route::any('callbusiness', 'SubmitController@callbusiness');//联系商家
     Route::any('assess', 'SubmitController@assess');//评价
 
-});//--lzz
+});//--zsy

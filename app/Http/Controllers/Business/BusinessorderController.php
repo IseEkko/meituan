@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class BusinessorderController extends Controller
 {
     /***退款列表
-     *@author zuoshengyu
+     *@author zuoshengyuwx
      * @return json
      */
     Public function brefundorderlist(){
@@ -25,7 +25,7 @@ class BusinessorderController extends Controller
     }
 
     /***退款页面
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserPayRequest $request
      * @return json
      */
@@ -39,7 +39,7 @@ class BusinessorderController extends Controller
     }
 
     /***已完成订单页面
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserPayRequest $request
      * @return json
      */
@@ -53,7 +53,7 @@ class BusinessorderController extends Controller
     }
 
     /***派送订单列表
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return json
      */
     Public function bdeliveryorderlist(){
@@ -65,7 +65,7 @@ class BusinessorderController extends Controller
 
     }
     /***已完成订单列表
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return json
      */
     Public function bfinishorderlist(){
@@ -78,7 +78,7 @@ class BusinessorderController extends Controller
     }
 
     /***商家订单派送页面
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserPayRequest $request
      * @return json
      */
@@ -92,7 +92,7 @@ class BusinessorderController extends Controller
     }
 
     /***退款功能
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @param UserPayRequest $request
      * @return json
      */
@@ -106,7 +106,7 @@ class BusinessorderController extends Controller
     }
 
     /***联系骑手
-     * @author zuoshengyu
+     * @author zuoshengyuwx
      * @return json
      */
     Public function bcallrider(){

@@ -13,6 +13,17 @@ class Order extends Model
     protected $guarded = [];
 
 
+    /*** 提交订单 将数据入库
+     * @author zuoshengyu
+     * @param $yonghu
+     * @param $num
+     * @param $bianhao
+     * @param $total
+     * @param $distance
+     * @param $delivery
+     * @param $time
+     * @return null
+     */
     public static function addorder($yonghu,$num,$bianhao,$total,$distance,$delivery,$time){
 
         try{
@@ -40,6 +51,12 @@ class Order extends Model
         }
 
     }
+
+    /***改变order表中订单状态
+     * @author zuoshengyu
+     * @param $order_id
+     * @return null
+     */
     public static function typechange($order_id){
         try {
             $data=self::where('order_id',$order_id)
@@ -54,6 +71,11 @@ class Order extends Model
         }
     }
 
+    /***未支付页面数据
+     * @author zuoshengyu
+     * @param $order_id
+     * @return null
+     */
     public static function nopayyemian($order_id){
 
         try{
@@ -71,6 +93,11 @@ class Order extends Model
     }
 
 
+    /***派送页面数据
+     * @author zuoshengyu
+     * @param $order_id
+     * @return null
+     */
     public static function paisongyemian($order_id){
 
         try{
@@ -88,6 +115,11 @@ class Order extends Model
 
     }
 
+    /***退款页面数据
+     * @author zuoshengyu
+     * @param $order_id
+     * @return null
+     */
     public static function tuikuanyemian($order_id){
 
         try{
@@ -106,6 +138,11 @@ class Order extends Model
     }
 
 
+    /***完成页面数据
+     * @author zuoshengyu
+     * @param $order_id
+     * @return null
+     */
     public static function finishyemian($order_id){
 
         try{
@@ -123,6 +160,10 @@ class Order extends Model
 
     }
 
+    /***完成列表数据
+     * @author zuoshengyu
+     * @return null
+     */
     public static function listorder(){
 
         try{
@@ -139,6 +180,10 @@ class Order extends Model
 
     }
 
+    /***退款列表数据
+     * @author zuoshengyu
+     * @return null
+     */
     public static function listorder2(){
 
         try{
@@ -154,6 +199,10 @@ class Order extends Model
         }
 
     }
+    /***派送列表数据
+     * @author zuoshengyu
+     * @return null
+     */
     public static function listorder3(){
 
         try{
@@ -169,6 +218,10 @@ class Order extends Model
         }
 
     }
+    /***未付款页面数据
+     * @author zuoshengyu
+     * @return null
+     */
     public static function listorder4(){
 
         try{
@@ -185,6 +238,12 @@ class Order extends Model
 
     }
 
+    /***退单功能
+     * @author zuoshengyu
+     * @param $order_id
+     * @param $reason
+     * @return null
+     */
     public static function tuidan($order_id,$reason){
 
         try{
@@ -201,6 +260,11 @@ class Order extends Model
 
     }
 
+    /***订单状态改变
+     * @author zuoshengyu
+     * @param $order_id
+     * @return null
+     */
     public static function typechange2($order_id){
         try {
             $data=self::where('order_id',$order_id)
@@ -215,6 +279,11 @@ class Order extends Model
             return null;
         }
     }
+    /***订单状态改变
+     * @author zuoshengyu
+     * @param $order_id
+     * @return null
+     */
     public static function typechangeb($order_id){
         try {
             $data=self::where('order_id',$order_id)
