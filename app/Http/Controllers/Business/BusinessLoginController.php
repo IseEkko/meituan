@@ -47,6 +47,7 @@ class BusinessLoginController extends Controller
      * 注销登录
      * @return \Illuminate\Http\JsonResponse
      */
+
     public function logout()
     {
         try {

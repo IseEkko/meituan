@@ -83,6 +83,28 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
 
 });//--lzz
 
+Route::prefix('rider')->namespace('Rider')->group(function () {
+    Route::get('showreceivingorderall', 'RiderReceivingOrderController@showreceivingorderall'); //展示抢单总页面
+    Route::get('showreceivingorder', 'RiderReceivingOrderController@showreceivingorder'); //展示抢单对应页面
+    Route::post('catchreceivingorder', 'RiderReceivingOrderController@catchreceivingorder'); //实现骑手抢单
+
+    Route::get('showrideruserinformationall', 'RiderInformationController@showrideruserinformationall'); //展示当前骑手与所有用户消息
+    Route::get('showriderbusinessinformationall', 'RiderInformationController@showriderbusinessinformationall'); //展示当前骑手与所有商家消息
+    Route::get('showbusinessuserinformationall', 'RiderInformationController@showbusinessuserinformationall'); //展示当前商家与所有用户消息
+    Route::get('showbusinessriderinformationall', 'RiderInformationController@showbusinessriderinformationall'); //展示当前商家与所有骑手消息
+    Route::get('showuserbusinessinformationall', 'RiderInformationController@showuserbusinessinformationall'); //展示当前用户与所有商家消息
+    Route::get('showuserriderinformationall', 'RiderInformationController@showuserriderinformationall'); //展示当前用户与所有骑手消息
+
+    Route::get('showrideruserinformation', 'RiderInformationController@showrideruserinformation'); //展示当前骑手与用户对话消息
+    Route::get('showriderbusinessinformation', 'RiderInformationController@showriderbusinessinformation'); //展示当前骑手与商家对话消息
+    Route::get('showuserbusinessinformation', 'RiderInformationController@showuserbusinessinformation'); //展示当前用户与商家对话消息
+
+    Route::post('talkrideruserinformation', 'RiderInformationController@talkrideruserinformation'); //发送当前骑手与用户对话信息
+    Route::post('talkriderbusinessinformation', 'RiderInformationController@talkriderbusinessinformation'); //发送当前骑手与商家对话信息
+    Route::post('talkuserbusinessinformation', 'RiderInformationController@talkuserbusinessinformation'); //发送当前商家与用户对话信息
+});//--唐邦彦
+
+
 
 Route::prefix('user')->namespace('User')->group(function () {
 
@@ -213,4 +235,5 @@ Route::prefix('riderhome')->namespace('Rider')->group(function () {
     Route::get('pass', 'RiderHomeController@Pass'); //骑手邮箱验证状态修改--lzz
     Route::post('updatepass', 'RiderHomeController@updatePass'); //骑手密码修改--lzz
 });
+
 
