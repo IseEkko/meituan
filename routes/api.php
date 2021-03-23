@@ -17,6 +17,44 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::prefix('super')->namespace('Super')->group(function () {
+
+    Route::post('login', 'SuperLoginController@login'); //超级管理员登陆
+    Route::post('logout', 'SuperLoginController@logout'); //超级退出登陆
+    Route::post('registered', 'SuperLoginController@registered'); //
+
+});//--lzz
+
+Route::prefix('rider')->namespace('Rider')->group(function () {
+    Route::post('login', 'RiderLoginController@login'); //骑手登陆--zsywx
+
+    
+
+    Route::post('logout', 'RiderLoginController@logout'); //骑手退出登陆
+    Route::post('registered', 'RiderLoginController@registered'); //骑手注册
+
+    Route::get('riderorderlist', 'RiderorderController@riderorderlist'); //骑手接单显示--zsywx
+    Route::get('rcallbusiness', 'RiderorderController@ rcallbusiness'); //联系商家--zsywx
+    Route::get('rcalluser', 'RiderorderController@rcalluser'); //联系用户--zsywx
+    Route::get('riderorder', 'RiderorderController@riderorder'); //骑手订单查看--zsywx
+
+});//--lzz  zsy
+Route::prefix('business')->namespace('Business')->group(function () {
+    Route::post('login', 'BusinessLoginController@login'); //商户登陆
+    Route::post('logout', 'BusinessLoginController@logout'); //商户退出登陆
+    Route::post('registered', 'BusinessLoginController@registered'); //商户注册
+    Route::get('brefundorderlist', 'BusinessorderController@brefundorderlist');//商家退款列表--zsywx
+    Route::get('brefundorder', 'BusinessorderController@brefundorder');//退款页面--zsywx
+    Route::get('bfinishorder', 'BusinessorderController@bfinishorder');//已完成订单页面--zsywx
+    Route::get('bdeliveryorderlist', 'BusinessorderController@bdeliveryorderlist');//派送列表--zsywx
+    Route::get('bfinishorderlist', 'BusinessorderController@bfinishorderlist');//已完成列表--zsywx
+    Route::get('bdeliveryorder', 'BusinessorderController@bdeliveryorder');//派送页面--zsywx
+    Route::post('bbackmoney', 'BusinessorderController@bbackmoney');//退款功能--zsywx
+    Route::post('bcallrider', 'BusinessorderController@bcallrider');//联系骑手--zsywx
+    Route::post('briderdelivery', 'BusinessorderController@briderdelivery');//确认骑手取货 --zsywx
+
+
+});//--lzz  zsy
+Route::prefix('super')->namespace('Super')->group(function () {
     Route::post('login', 'SuperLoginController@login'); //超级管理员登陆--lzz
     Route::post('logout', 'SuperLoginController@logout'); //超级退出登陆--lzz
     Route::post('registered', 'SuperLoginController@registered'); //骑手注册--lzz
@@ -35,12 +73,45 @@ Route::prefix('business')->namespace('Business')->group(function () {
     Route::post('registered', 'BusinessLoginController@registered'); //商户注册--lzz
     Route::post('test', 'BusinessLoginController@test'); //商户注册--lzz
 });
+
 Route::prefix('admin')->namespace('Admin')->group(function () {
 
     Route::post('login', 'AdminLoginController@login'); //商户登陆
     Route::post('logout', 'AdminLoginController@logout'); //商户退出登陆
     Route::post('registered', 'AdminLoginController@registered'); //商户注册
+    Route::any('test', 'AdminLoginController@test'); //商户注册
+
 });//--lzz
+
+
+Route::prefix('user')->namespace('User')->group(function () {
+
+    Route::get('submitorder', 'SubmitController@submitorder'); //获取商家商品信息--zsywx
+    Route::get('submituorder', 'SubmitController@submituorder');//获取用户信息--zsywx
+    Route::get('submitdelivery', 'SubmitController@submitdelivery');//配送费--zsywx
+    Route::get('submittime', 'SubmitController@submittime');//随机时间--zsywx
+    Route::get('submittotal', 'SubmitController@submittotal');//获取总价--zsywx
+
+
+    Route::post('payorder', 'SubmitController@payorder');//支付页面数据--zsywx
+    Route::post('pay', 'SubmitController@pay');//支付功能--zsywx
+    Route::get('unomoneyorder', 'SubmitController@unomoneyorder');//未支付订单页面--zsywx
+    Route::get('udelivery', 'SubmitController@udelivery');//派送订单页面--zsywx
+    Route::get('urefund', 'SubmitController@urefund');//获取退款订单页面数据--zsywx
+    Route::get('ufinish', 'SubmitController@ufinish');//获取完成订单页面数据--zsywx
+    Route::get('unomonylist', 'SubmitController@unomonylist');//获取未付款列表数据--zsywx
+    Route::get('udeliverylist', 'SubmitController@udeliverylist');//获取派送列表数据--zsywx
+    Route::get('ufinishlist', 'SubmitController@ufinishlist');//获取完成列表数据--zsywx
+
+    Route::get('urefundlist', 'SubmitController@urefundlist');//获取退款列表数据--zsywx
+    Route::post('ubackorder', 'SubmitController@ubackorder');//退单功能--zsywx
+    Route::post('utakeorder', 'SubmitController@utakeorder');//确认收货功能--zsywx
+    Route::get('callrider', 'SubmitController@callrider');//联系骑手--zsywx
+    Route::get('callbusiness', 'SubmitController@callbusiness');//联系商家--zsywx
+    Route::post('assess', 'SubmitController@assess');//评价--zsywx
+
+
+});//--zsy
 
 
 Route::prefix('super')->namespace('Super')->group(function () {
@@ -107,7 +178,7 @@ Route::prefix('admin')->namespace('Admin')->group(function () {
     Route::get('ridermanagesearch', 'RiderManageController@riderManageSearch'); //骑手管理中搜索骑手信息
 
 });//--cwp
-=======
+
     Route::post('login', 'AdminLoginController@login'); //普通管理员登陆--lzz
     Route::post('logout', 'AdminLoginController@logout'); //普通管理员退出登陆--lzz
     Route::post('registered', 'AdminLoginController@registered'); //普通管理员注册--lzz
@@ -142,3 +213,4 @@ Route::prefix('riderhome')->namespace('Rider')->group(function () {
     Route::get('pass', 'RiderHomeController@Pass'); //骑手邮箱验证状态修改--lzz
     Route::post('updatepass', 'RiderHomeController@updatePass'); //骑手密码修改--lzz
 });
+
