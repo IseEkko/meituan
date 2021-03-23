@@ -11,8 +11,9 @@ if (!function_exists('email')) {
      */
     function email($ce, $email,$yong)
     {
+          $em = $email;
 
-        $zifu = "$ce$email ！";//这里可以修改发送的内容
+        $zifu = "$ce$em ！";//这里可以修改发送的内容
         Mail::raw($zifu, function ($message) use ($email,$yong) {
             $to = "$email";
             $message->to($to)->subject($yong);

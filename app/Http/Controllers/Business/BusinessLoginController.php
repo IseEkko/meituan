@@ -25,9 +25,16 @@ class BusinessLoginController extends Controller
         try {
             $credentials = self::credentials($loginRequest);
 
-
             if (!$token = auth('business')->attempt($credentials)) {
                 return json_fail(100, '账号或者用户名错误!', null);
+            }else{
+                //转换两次才能使用
+                $passing= Business::find($loginRequest['email']);
+                $pass = json_encode($passing);
+                $pass = json_decode($pass);
+                if (!($pass[0]->real_passing==200&&$pass[0]->passing==200)){
+                    return json_fail(100, '验证未完成!', null);
+                }
             }
             return self::respondWithToken($token, '登陆成功!');
         } catch (\Exception $e) {
@@ -44,6 +51,7 @@ class BusinessLoginController extends Controller
     public function logout()
     {
         try {
+
             auth()->logout();
         } catch (\Exception $e) {
 
@@ -83,7 +91,9 @@ class BusinessLoginController extends Controller
 
     }
     protected function userHandle($request)
-    {     $path = upload($request['image_url']);
+    {
+        $path = upload($request['image_url']);
+        $pathth = "http://127.0.0.1:8000/$path";
         $registeredInfo = $request->except('password_confirmation');
         $registeredInfo['password'] = bcrypt($registeredInfo['password']);
         $registeredInfo['identity'] = $registeredInfo['identity'];
@@ -92,19 +102,17 @@ class BusinessLoginController extends Controller
         $registeredInfo['license'] = $registeredInfo['license'];
         $registeredInfo['message'] = $registeredInfo['message'];
         $registeredInfo['address'] = $registeredInfo['address'];
-        $registeredInfo['image_url'] = $path;
+        $registeredInfo['image_url'] = $pathth;
         $registeredInfo['type'] = $registeredInfo['type'];
         $registeredInfo['number'] = $registeredInfo['number'];
         $registeredInfo['email'] = $registeredInfo['email'];
         $registeredInfo['approval'] = 100;
         $registeredInfo['real_approval'] = 100;
-
+        $registeredInfo['passing'] = 100;
+        $registeredInfo['real_passing'] = 100;
         return $registeredInfo;
     }
 
-    public function test(){
-        $id = auth('business')->user()->name;
-        dd($id);
-    }
+
 
 }
